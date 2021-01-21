@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PaymentApplication.Presentation.Operations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,10 @@ namespace PaymentApplication.Presentation
     {
         static void Main(string[] args)
         {
+            ProcessPaymentOperations pp = new ProcessPaymentOperations();
+            pp.ProcessPayment();
+            Console.WriteLine("--------------------------------------------------");
+            Console.ReadLine();
         }
     }
 }
