@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace PaymentApplication.Repositories
 {
-    public class CheapPayment : ICheapPayment
+    public class ExpensivePayment : IExpensivePayment
     {
         private PaymentDBEntities _db = new PaymentDBEntities();
 
-        public void SaveDataAsCheapPayment(CreditCard cd)
+        public void SaveDataAsExpensivePayment(CreditCard cd)
         {
             try
             {
                 _db.CreditCards.Add(cd);
                 _db.SaveChanges();
-                Console.WriteLine("Cheap Payment has been processed successfully");
+                Console.WriteLine("Premium Payment has been processed successfully");
 
                 GC.SuppressFinalize(_db);
             }

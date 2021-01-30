@@ -1,4 +1,5 @@
 ﻿using PaymentApplication.Database.Model;
+using PaymentApplication.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace PaymentApplication.Presentation.Operations
     public class ProcessPaymentOperations
     {
         private CreditCard card = new CreditCard();
-
+        private CheapPayment cps = new CheapPayment();
+        private PremiumPayment ppm = new PremiumPayment();
+        private ExpensivePayment ep = new ExpensivePayment();
 
         public void ProcessPayment()
         {
@@ -31,6 +34,22 @@ namespace PaymentApplication.Presentation.Operations
 
             Console.WriteLine("Enter the Amount!");
             card.Amount = Decimal.Parse(Console.ReadLine());
+
+            if (card.Amount < 20)
+            {
+                card.ServiceUsed = "Cheap Payment";
+                cps.SaveDataAsCheapPayment(card);
+            }
+            if (card.Amount > 20 && card.Amount < 50)
+            {
+                card.ServiceUsed = "Premium Payment";
+                ppm.SaveDataAsPremiumPayment(card);
+            }
+            if (card.Amount > 50)
+            {
+                card.ServiceUsed = "Expensive Payment";
+                ep.SaveDataAsExpensivePayment(card);
+            }
         }
     }
 }

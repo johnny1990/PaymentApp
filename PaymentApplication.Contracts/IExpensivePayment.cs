@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace PaymentApplication.Contracts
 {
-    public interface ICheapPayment
+    public interface IExpensivePayment
     {
-        void SaveDataAsCheapPayment(CreditCard cd);
+        void SaveDataAsExpensivePayment(CreditCard cd);
     }
 }

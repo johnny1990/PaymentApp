@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICheapPayment.cs" />
+    <Compile Include="IExpensivePayment.cs" />
+    <Compile Include="IPremiumPayment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
