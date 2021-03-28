@@ -17,39 +17,47 @@ namespace PaymentApplication.Presentation.Operations
 
         public void ProcessPayment()
         {
-            Console.WriteLine("-------------------Welcome to Payment Demo Applicaton-----------------------------");
-            Console.WriteLine("You need to introduce your Credit Card Number, Card Holder, Expiration date, Security Code  and to perform validation!");
-
-            Console.WriteLine("Enter the Credit Number!");
-            card.CreditCardNumber = Console.ReadLine();
-
-            Console.WriteLine("Enter the Card Holder!");
-            card.CardHolder = Console.ReadLine();
-
-            Console.WriteLine("Enter Expiration date!");
-            card.ExpirationDate = DateTime.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter the Security code!");
-            card.SecurityCode = Int32.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter the Amount!");
-            card.Amount = Decimal.Parse(Console.ReadLine());
-
-            if (card.Amount < 20)
+            try
             {
-                card.ServiceUsed = "Cheap Payment";
-                cps.SaveDataAsCheapPayment(card);
+                Console.WriteLine("-------------------Welcome to Payment Demo Applicaton-----------------------------");
+                Console.WriteLine("You need to introduce your Credit Card Number, Card Holder, Expiration date, Security Code  and to perform validation!");
+
+                Console.WriteLine("Enter the Credit Number!");
+                card.CreditCardNumber = Console.ReadLine();
+
+                Console.WriteLine("Enter the Card Holder!");
+                card.CardHolder = Console.ReadLine();
+
+                Console.WriteLine("Enter Expiration date!");
+                card.ExpirationDate = DateTime.Parse(Console.ReadLine());//24/07/2021 12:00:00 AM
+
+                Console.WriteLine("Enter the Security code!");
+                card.SecurityCode = Int32.Parse(Console.ReadLine());
+
+                Console.WriteLine("Enter the Amount!");
+                card.Amount = Decimal.Parse(Console.ReadLine());
+
+                if (card.Amount < 20)
+                {
+                    card.ServiceUsed = "Cheap Payment";
+                    cps.SaveDataAsCheapPayment(card);
+                }
+                if (card.Amount > 20 && card.Amount < 50)
+                {
+                    card.ServiceUsed = "Premium Payment";
+                    ppm.SaveDataAsPremiumPayment(card);
+                }
+                if (card.Amount > 50)
+                {
+                    card.ServiceUsed = "Expensive Payment";
+                    ep.SaveDataAsExpensivePayment(card);
+                }
             }
-            if (card.Amount > 20 && card.Amount < 50)
+            catch(Exception ex)
             {
-                card.ServiceUsed = "Premium Payment";
-                ppm.SaveDataAsPremiumPayment(card);
+                ex.Message.ToString();
             }
-            if (card.Amount > 50)
-            {
-                card.ServiceUsed = "Expensive Payment";
-                ep.SaveDataAsExpensivePayment(card);
-            }
+           
         }
     }
 }
